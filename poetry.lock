@@ -72,6 +72,20 @@ files = [
 test = ["pytest (>=6)"]
 
 [[package]]
+name = "faker"
+version = "19.12.0"
+description = "Faker is a Python package that generates fake data for you."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "Faker-19.12.0-py3-none-any.whl", hash = "sha256:5990380a8ee81cf189d6b85d5fdc1fb43772cb136aca0385a08ff24ef01b9fdf"},
+    {file = "Faker-19.12.0.tar.gz", hash = "sha256:91438f6b1713274ec3f24970ba303617be86ce5caf6f6a0776f1d04777b6ff5f"},
+]
+
+[package.dependencies]
+python-dateutil = ">=2.4"
+
+[[package]]
 name = "fastapi"
 version = "0.104.0"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
@@ -310,6 +324,31 @@ tomli = {version = ">=1.0.0", markers = "python_version < \"3.11\""}
 testing = ["argcomplete", "attrs (>=19.2.0)", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "setuptools", "xmlschema"]
 
 [[package]]
+name = "python-dateutil"
+version = "2.8.2"
+description = "Extensions to the standard Python datetime module"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
+files = [
+    {file = "python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
+    {file = "python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
+]
+
+[package.dependencies]
+six = ">=1.5"
+
+[[package]]
+name = "six"
+version = "1.16.0"
+description = "Python 2 and 3 compatibility utilities"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
+files = [
+    {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
+    {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
+]
+
+[[package]]
 name = "sniffio"
 version = "1.3.0"
 description = "Sniff out which async library your code is running under"
@@ -381,4 +420,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "27ece9078297f85a046f44bb2aa6266676e0427c47258d5580b8e7f7aebca2e5"
+content-hash = "1f71937f6d115883fad0c9b5fdb89228449a3008a23c549f664815dcbb1dd608"
