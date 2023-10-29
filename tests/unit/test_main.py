@@ -1,15 +1,11 @@
-# Testes hardcoded (má prática)
-from db.mock_db import usuarios
+import pytest
+from main import listar_usuarios, criar_usuario, obter_usuario, atualizar_usuario, excluir_usuario
 
 
-def test_read_root():
-    response = {"Hello": "World"}
-    assert response == {"Hello": "World"}
-    assert dict(response) == {"Hello": "World"}
-
-
-def test_get_users():
-    expected_response = [
+# Fixture para criar um conjunto de dados de usuários mockados
+@pytest.fixture
+def mock_usuarios():
+    return [
         {
             "id": 1,
             "nome": "Dr. John Smith",
@@ -71,16 +67,79 @@ def test_get_users():
             "cargo_hospital": "Técnico de Farmácia"
         }
     ]
-    assert expected_response == usuarios
-    assert type(expected_response) is list
 
 
-def test_get_user_by_id():
-    received_id = 1
-    expected_result = {}
-    for user in usuarios:
-        if user['id'] == received_id:
-            expected_result = user
+# Testes unitários
 
-    assert expected_result == usuarios[0]
-    assert expected_result['id'] == 1
+def test_listar_usuarios(mock_usuarios):
+    result = listar_usuarios()
+    assert result == mock_usuarios
+
+
+def test_obter_usuario(mock_usuarios):
+    usuario_id = 1
+    expected_result = mock_usuarios[0]
+
+    result = obter_usuario(usuario_id)
+    assert result == expected_result
+
+
+def test_obter_usuario_nao_encontrado(mock_usuarios):
+    usuario_id = 13
+
+    result = obter_usuario(usuario_id)
+    assert result == {"mensagem": "Usuário não encontrado"}
+
+
+def test_criar_usuario(mock_usuarios):
+    novo_usuario = {
+        "nome": "Novo Usuário",
+        "email": "novo_usuario@example.com",
+        "cargo_hospital": "Novo Cargo"
+    }
+
+    result = criar_usuario(novo_usuario)
+    assert result["id"] == 11  # Verifica se o ID foi atribuído corretamente
+
+
+def test_atualizar_usuario(mock_usuarios):
+    usuario_id = 1
+    dados_atualizados = {
+        "nome": "Novo Nome",
+        "email": "novo_email@example.com"
+    }
+
+    result = atualizar_usuario(usuario_id, dados_atualizados)
+    assert result == {"mensagem": "Usuário atualizado com sucesso"}
+    usuario_atualizado = obter_usuario(usuario_id)
+    assert usuario_atualizado["nome"] == "Novo Nome"
+    assert usuario_atualizado["email"] == "novo_email@example.com"
+
+
+def test_atualizar_usuario_nao_encontrado(mock_usuarios):
+    usuario_id = 13
+    dados_atualizados = {
+        "nome": "Novo Nome",
+        "email": "novo_email@example.com"
+    }
+
+    result = atualizar_usuario(usuario_id, dados_atualizados)
+    assert result == {"mensagem": "Usuário não encontrado"}
+
+
+def test_excluir_usuario(mock_usuarios):
+    usuario_id = 1
+
+    result = excluir_usuario(usuario_id)
+    assert result == {"mensagem": "Usuário excluído com sucesso"}
+
+
+def test_excluir_usuario_nao_encontrado(mock_usuarios):
+    usuario_id = 13
+
+    result = excluir_usuario(usuario_id)
+    assert result == {"mensagem": "Usuário não encontrado"}
+
+
+if __name__ == "__main__":
+    pytest.main()
