@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from db.mock_db import usuarios
 
 app = FastAPI()
@@ -29,7 +29,7 @@ def obter_usuario(usuario_id: int):
     for usuario in usuarios:
         if usuario["id"] == usuario_id:
             return usuario
-    return {"mensagem": "Usuário não encontrado"}
+    raise HTTPException(status_code=404, detail="Usuário não encontrado")
 
 
 # Rota para atualizar um usuário por ID
@@ -38,8 +38,8 @@ def atualizar_usuario(usuario_id: int, dados_atualizados: dict):
     for usuario in usuarios:
         if usuario["id"] == usuario_id:
             usuario.update(dados_atualizados)
-            return {"mensagem": "Usuário atualizado com sucesso"}
-    return {"mensagem": "Usuário não encontrado"}
+            return {"detail": "Usuário atualizado com sucesso"}
+    raise HTTPException(status_code=404, detail="Usuário não encontrado")
 
 
 # Rota para excluir um usuário por ID
@@ -48,5 +48,5 @@ def excluir_usuario(usuario_id: int):
     for usuario in usuarios:
         if usuario["id"] == usuario_id:
             usuarios.remove(usuario)
-            return {"mensagem": "Usuário excluído com sucesso"}
-    return {"mensagem": "Usuário não encontrado"}
+            return {"detail": "Usuário excluído com sucesso"}
+    raise HTTPException(status_code=404, detail="Usuário não encontrado")

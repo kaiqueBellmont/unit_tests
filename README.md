@@ -49,3 +49,18 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 #### Melhoria de desempenho:
 - Os context managers podem melhorar o desempenho, uma vez que podem ser projetados para inicializar recursos apenas quando necessário e liberá-los imediatamente após o uso, em vez de mantê-los abertos por mais tempo do que o necessário.
 
+
+### SETUP e TEARDOWN
+
+**__As funções de setup e teardown são usadas em testes para configurar o ambiente de teste antes de executar os testes e limpar qualquer estado após a execução dos testes. Elas são frequentemente utilizadas em frameworks de teste, como o Pytest, para garantir que os testes sejam executados em um ambiente previsível e consistente.__**
+
+#### Setup (Configuração):
+
+- A função de setup é usada para configurar o ambiente de teste antes da execução dos testes. Isso pode incluir a criação de dados de teste, a inicialização de recursos, a configuração de variáveis de ambiente, a preparação de conexões de banco de dados, entre outras tarefas.
+- Essa configuração é comum a muitos testes e é executada uma vez antes de cada teste individual.
+- No Pytest, as funções de setup geralmente seguem a convenção de nomenclatura setup_ + nome do teste. Por exemplo, para um teste chamado test_example, a função de setup correspondente seria setup_test_example.
+
+#### Teardown (Limpeza):
+- A função de teardown é usada para limpar ou restaurar o ambiente após a execução dos testes. Isso é importante para garantir que os testes sejam independentes uns dos outros e não deixem resíduos que possam interferir em testes subsequentes.
+- A limpeza pode incluir a remoção de dados de teste, a liberação de recursos, o fechamento de conexões de banco de dados e a reversão de quaisquer alterações feitas durante a execução dos testes.
+- Assim como a função de setup, as funções de teardown seguem a convenção de nomenclatura teardown_ + nome do teste no Pytest. Por exemplo, para o teste test_example, a função de teardown correspondente seria teardown_test_example.
