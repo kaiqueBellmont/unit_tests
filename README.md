@@ -4,6 +4,20 @@
 uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
+### Tests:
+
+```bash
+coverage run -m pytest
+```
+
+```bash
+coverage report
+```
+
+```bash
+coverage html
+```
+
 ### Fixtures
 - Fixtures são uma característica fundamental do framework de teste pytest em Python. Elas são funções definidas pelo usuário que fornecem dados de configuração, objetos ou recursos para os testes. Fixtures são usadas para configurar o ambiente de teste, preparar dados de teste, inicializar objetos e realizar tarefas de configuração necessárias antes da execução dos testes
 
