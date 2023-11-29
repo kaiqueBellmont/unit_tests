@@ -26,6 +26,11 @@ def teardown_function():
     usuarios.clear()
 
 
+def test_read_root():
+    response = client.get("/")
+    response.status_code == 200
+
+
 def test_listar_usuarios():
     response = client.get("/usuarios/")
     assert response.status_code == 200

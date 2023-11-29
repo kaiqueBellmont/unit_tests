@@ -50,3 +50,6 @@ def excluir_usuario(usuario_id: int):
             usuarios.remove(usuario)
             return {"detail": "Usuário excluído com sucesso"}
     raise HTTPException(status_code=404, detail="Usuário não encontrado")
+
+
+
